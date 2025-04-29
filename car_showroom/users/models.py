@@ -5,9 +5,25 @@ from django.core.validators import FileExtensionValidator
 
 
 class CustomerUser(AbstractUser):
+    pass
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(
+        'CustomerUser',
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name='user_profile'
+    )
+    first_name = models.CharField(max_length=25, blank=True, null=True)
+    last_name = models.CharField(max_length=25, blank=True, null=True)
     avatar = models.ImageField(
         upload_to=upload_photo_customer_user,
         default='users/default.jpg',
         validators=[FileExtensionValidator(allowed_extensions=['jpg', 'png', 'jpeg']), validate_size_image]
 
     )
+    description = models.CharField(max_length=255, blank=True, null=True)
+    date_birth = models.DateField(blank=True, null=True)
+    points = models.IntegerField(default=0)
