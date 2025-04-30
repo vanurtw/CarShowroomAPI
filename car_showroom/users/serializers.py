@@ -5,6 +5,7 @@ from django.contrib.auth.password_validation import validate_password as valid_p
 
 class CustomerUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
+
     class Meta:
         model = CustomerUser
         fields = [
@@ -18,6 +19,6 @@ class CustomerUserSerializer(serializers.ModelSerializer):
         return password
 
     def save(self):
-        user =  CustomerUser.objects.create_user(**self.validated_data)
+        user = CustomerUser.objects.create_user(**self.validated_data)
         Profile.objects.create(user=user, first_name=user.username)
         return user

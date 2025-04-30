@@ -27,3 +27,7 @@ class Profile(models.Model):
     description = models.CharField(max_length=255, blank=True, null=True)
     date_birth = models.DateField(blank=True, null=True)
     points = models.IntegerField(default=0)
+    phone = models.CharField(max_length=15, blank=True, null=True)
+
+    def __str__(self):
+        return f'Профиль пользователя {self.user}'
