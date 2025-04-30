@@ -2,6 +2,8 @@ from rest_framework import serializers
 from .models import CustomerUser, Profile
 from django.contrib.auth.password_validation import validate_password as valid_password
 
+from cars.models import Car
+
 
 class CustomerUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
@@ -22,3 +24,41 @@ class CustomerUserSerializer(serializers.ModelSerializer):
         user = CustomerUser.objects.create_user(**self.validated_data)
         Profile.objects.create(user=user, first_name=user.username)
         return user
+
+
+class CarSerializer(serializers.ModelSerializer):
+    car_type = serializers.CharField(source='get_car_type_display')
+
+    class Meta:
+        model = Car
+        fields = [
+            'id',
+            'car_type',
+            'brand',
+            'name',
+            'year'
+        ]
+
+
+class ProfileUserSerializer(serializers.ModelSerializer):
+    cars = serializers.SerializerMethodField()
+
+    def get_cars(self, instance):
+        data = instance.profile_cars.all()
+        serializer = CarSerializer(data, many=True)
+        return serializer.data
+
+    class Meta:
+        model = Profile
+        fields = [
+            'id',
+            'user',
+            'first_name',
+            'last_name',
+            'avatar',
+            'description',
+            'date_birth',
+            'points',
+            'phone',
+            'cars'
+        ]
