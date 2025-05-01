@@ -25,9 +25,15 @@ class CustomerUserSerializer(serializers.ModelSerializer):
         Profile.objects.create(user=user, first_name=user.username)
         return user
 
-
 class CustomerUserDetailSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CustomerUser
+        fields = ['username', 'email']
+
+class CustomerUserProfileSerializer(serializers.ModelSerializer):
     cars = serializers.SerializerMethodField()
+    user = CustomerUserDetailSerializer()
 
     def get_cars(self, instance):
         data = instance.profile_cars.all()
@@ -47,4 +53,18 @@ class CustomerUserDetailSerializer(serializers.ModelSerializer):
             'points',
             'phone',
             'cars'
+        ]
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = [
+            'id',
+            'first_name',
+            'last_name',
+            'avatar',
+            'description',
+            'date_birth',
+            'points',
+            'phone',
         ]
