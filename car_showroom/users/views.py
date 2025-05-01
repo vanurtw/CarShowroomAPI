@@ -2,7 +2,8 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from services.services import get_tokens_for_user
-from .serializers import CustomerUserSerializer, ProfileUserSerializer
+from .serializers import CustomerUserSerializer, CustomerUserDetailSerializer
+from rest_framework.permissions import IsAuthenticated
 
 from .models import CustomerUser, Profile
 
@@ -16,8 +17,10 @@ class RegistrationAPIView(APIView):
             return Response(tokens)
 
 
-class UserAPIView(APIView):
+class UserAPIView(GenericAPIView):
+    serializer_class = CustomerUserDetailSerializer
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
-        user = Profile.objects.get(id=1)
-        serializer = ProfileUserSerializer(user)
+        serializer = self.serializer_class(request.user.user_profile)
         return Response(serializer.data)

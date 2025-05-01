@@ -26,7 +26,7 @@ class CustomerUserSerializer(serializers.ModelSerializer):
         return user
 
 
-class ProfileUserSerializer(serializers.ModelSerializer):
+class CustomerUserDetailSerializer(serializers.ModelSerializer):
     cars = serializers.SerializerMethodField()
 
     def get_cars(self, instance):
