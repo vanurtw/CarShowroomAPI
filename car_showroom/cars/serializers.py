@@ -12,5 +12,6 @@ class CarSerializer(serializers.ModelSerializer):
             'car_type',
             'brand',
             'name',
-            'year'
+            'year',
+            'image'
         ]

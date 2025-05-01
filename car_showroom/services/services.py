@@ -30,3 +30,8 @@ def get_tokens_for_user(user):
     }
 
 
+def upload_photo_car(instance, filename):
+    '''
+       Построение к пути аватарки пользователя media/users/username/file
+    '''
+    return f'{settings.BASE_DIR}/media/users/{instance.user.username}/{filename}'

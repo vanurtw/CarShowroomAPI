@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import Profile
+from services.services import upload_photo_car
 
 
 class Car(models.Model):
@@ -23,6 +24,11 @@ class Car(models.Model):
     brand = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
     year = models.DateField(blank=True, null=True)
+    image = models.ImageField(
+        upload_to=upload_photo_car,
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
         return f'Машина {self.name} пользователя {self.profile_user.user}'

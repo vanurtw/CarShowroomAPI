@@ -33,13 +33,8 @@ class CustomerUserDetailSerializer(serializers.ModelSerializer):
 
 
 class CustomerUserProfileSerializer(serializers.ModelSerializer):
-    cars = serializers.SerializerMethodField()
+    cars = CarSerializer(source="profile_cars", many=True)
     user = CustomerUserDetailSerializer()
-
-    def get_cars(self, instance):
-        data = instance.profile_cars.all()
-        serializer = CarSerializer(data, many=True)
-        return serializer.data
 
     class Meta:
         model = Profile
