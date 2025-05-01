@@ -1,11 +1,10 @@
-from functools import partial
-
 from rest_framework.generics import GenericAPIView, UpdateAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from services.services import get_tokens_for_user
 from .serializers import CustomerUserSerializer, CustomerUserProfileSerializer, ProfileSerializer
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import status
 
 from .models import CustomerUser, Profile
 
@@ -36,11 +35,16 @@ class ProfileAPIView(GenericAPIView):
 
     def get(self, request):
         serializer = self.serializer_class(request.user.user_profile)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def patch(self, request):
         profile = request.user.user_profile
         serializer = self.serializer_class(instance=profile, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def delete(self, request):
+        profile = request.user.user_profile
+        profile.delete()
+        return Response({"detail": "ok"}, status=status.HTTP_204_NO_CONTENT)

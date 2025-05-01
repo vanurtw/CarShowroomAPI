@@ -25,11 +25,12 @@ class CustomerUserSerializer(serializers.ModelSerializer):
         Profile.objects.create(user=user, first_name=user.username)
         return user
 
-class CustomerUserDetailSerializer(serializers.ModelSerializer):
 
+class CustomerUserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomerUser
         fields = ['username', 'email']
+
 
 class CustomerUserProfileSerializer(serializers.ModelSerializer):
     cars = serializers.SerializerMethodField()
@@ -55,6 +56,7 @@ class CustomerUserProfileSerializer(serializers.ModelSerializer):
             'cars'
         ]
 
+
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
@@ -68,3 +70,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             'points',
             'phone',
         ]
+        extra_kwargs = {
+            'points': {'read_only': True},
+            'id': {'read_only': True},
+        }
