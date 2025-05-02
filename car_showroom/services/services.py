@@ -5,14 +5,14 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 def upload_photo_customer_user(instance, filename):
     '''
-       Построение к пути аватарки пользователя media/users/username/file
+        Построение к пути аватарки пользователя media/users/username/file
     '''
     return f'{settings.BASE_DIR}/media/users/{instance.user.username}/{filename}'
 
 
 def validate_size_image(file):
     '''
-    Проверка размера файла
+        Проверка размера файла
     '''
     file_size = 2
     if file.size > file_size * 1024 * 1024:
@@ -21,7 +21,7 @@ def validate_size_image(file):
 
 def get_tokens_for_user(user):
     '''
-    Создания токена вручную
+        Создания токена вручную
     '''
     refresh = RefreshToken.for_user(user)
     return {
@@ -32,6 +32,15 @@ def get_tokens_for_user(user):
 
 def upload_photo_car(instance, filename):
     '''
-       Построение к пути аватарки пользователя media/users/username/file
+        Построение к пути аватарки пользователя media/users/username/file
     '''
     return f'{settings.BASE_DIR}/media/users/{instance.user.username}/{filename}'
+
+
+def user_machine_verification(user, car):
+    '''
+        Проверка, что машина принадлежит пользователю
+    '''
+    if car in user.user_profile.profile_cars.all():
+        return True
+    return False
