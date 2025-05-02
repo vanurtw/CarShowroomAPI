@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'users.apps.UsersConfig',
     'cars.apps.CarsConfig',
+    'records.apps.RecordsConfig',
 
 ]
 
