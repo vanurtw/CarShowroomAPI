@@ -4,7 +4,7 @@ from .models import Car, Record
 
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['id']
 
 
 @admin.register(Record)

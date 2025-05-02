@@ -15,3 +15,4 @@ class CarSerializer(serializers.ModelSerializer):
             'year',
             'image'
         ]
+        read_only_fields = ['id']
