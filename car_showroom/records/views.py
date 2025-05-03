@@ -28,3 +28,19 @@ class RecordDetailAPIView(GenericAPIView):
             serializer = self.serializer_class(record)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response({'detail': 'This is not your post'}, status=status.HTTP_200_OK)
+
+    def patch(self, request, id, *args, **kwargs):
+        record = get_object_or_404(Record, id=id)
+        if user_record_verification(request.user, record):
+            serializer = self.serializer_class(instance=record, data=request.data, partial=True)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({'detail': 'This is not your post'}, status=status.HTTP_200_OK)
+
+    def delete(self, request, id, *args, **kwargs):
+        record = get_object_or_404(Record, id=id)
+        if user_record_verification(request.user, record):
+            record.delete()
+            return Response({'detail': 'ok'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'detail': 'This is not your post'}, status=status.HTTP_200_OK)
