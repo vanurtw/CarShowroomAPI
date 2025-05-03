@@ -8,6 +8,7 @@ from services.services import user_record_verification
 from rest_framework import status
 
 
+
 class RecordAPIView(GenericAPIView):
     serializer_class = RecordSerializer
     permission_classes = [IsAuthenticated]
