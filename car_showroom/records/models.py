@@ -1,6 +1,8 @@
 from django.db import models
 from users.models import Profile
 from cars.models import Car
+
+
 # Create your models here.
 
 
@@ -27,6 +29,7 @@ class Record(models.Model):
         on_delete=models.CASCADE,
         related_name='car_records'
     )
+    recording_date = models.DateField()
     description = models.CharField(max_length=500, blank=True, null=True)
     date_create = models.DateTimeField(auto_now_add=True)
 
