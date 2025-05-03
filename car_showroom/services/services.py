@@ -44,3 +44,12 @@ def user_machine_verification(user, car):
     if car in user.user_profile.profile_cars.all():
         return True
     return False
+
+
+def user_record_verification(user, record):
+    '''
+        Проверка, что запись принадлежит пользователю
+    '''
+    if record in user.user_profile.profile_records.all():
+        return True
+    return False
