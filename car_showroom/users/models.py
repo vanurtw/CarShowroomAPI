@@ -5,7 +5,9 @@ from django.core.validators import FileExtensionValidator
 
 
 class CustomerUser(AbstractUser):
-    pass
+    class Meta:
+        verbose_name = 'Пользователь'
+        verbose_name_plural = 'Пользователи'
 
 
 class Profile(models.Model):
@@ -31,3 +33,8 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'Профиль пользователя {self.user}'
+
+
+    class Meta:
+        verbose_name = 'Профиль'
+        verbose_name_plural = 'Профили'

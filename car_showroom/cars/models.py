@@ -32,3 +32,8 @@ class Car(models.Model):
 
     def __str__(self):
         return f'Машина {self.name} пользователя {self.profile_user.user}'
+
+
+    class Meta:
+        verbose_name = 'Машина'
+        verbose_name_plural = 'Машины'

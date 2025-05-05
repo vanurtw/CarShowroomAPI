@@ -17,6 +17,10 @@ class Service(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Услуга'
+        verbose_name_plural = 'Услуги'
+
 
 class Record(models.Model):
     CHOICES = [
@@ -53,3 +57,8 @@ class Record(models.Model):
 
     def __str__(self):
         return f'Заказ пользователя {self.profile.user} на машину {self.car.name}'
+
+
+    class Meta:
+        verbose_name = 'Запись'
+        verbose_name_plural = 'Записи'

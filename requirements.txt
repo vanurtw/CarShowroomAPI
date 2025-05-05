@@ -17,4 +17,19 @@ uritemplate==4.1.1
 
 
 
-#    pip install -r requirements.txt
+#    pip install -r requirements.txt - установить все зависимости
+
+#    python manage.py runserver  - запустить сервер
+
+#    http://127.0.0.1:8000/admin/ - админ панель
+
+#    http://127.0.0.1:8000/swagger/ - сваггер
+
+
+#    Если нет БД, то
+
+#    python manage.py makemigrations
+#    python manage.py migrate
+
+
+
