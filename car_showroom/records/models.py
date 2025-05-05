@@ -6,6 +6,18 @@ from cars.models import Car
 # Create your models here.
 
 
+class Service(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, blank=True, null=True)
+    price = models.IntegerField()
+    active = models.BooleanField(default=True)
+    date_create = models.DateField(auto_now_add=True)
+
+
+    def __str__(self):
+        return self.name
+
+
 class Record(models.Model):
     CHOICES = [
         ('P', 'pending'),
@@ -19,6 +31,12 @@ class Record(models.Model):
         on_delete=models.CASCADE,
         related_name='profile_records'
     )
+    service = models.ForeignKey(
+        'Service',
+        on_delete=models.CASCADE,
+        related_name='service_records'
+    )
+
     status = models.CharField(
         max_length=1,
         choices=CHOICES,
