@@ -5,7 +5,8 @@ from services.services import get_tokens_for_user
 from .serializers import CustomerUserSerializer, CustomerUserProfileSerializer, ProfileSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 from .models import CustomerUser, Profile
 
 
@@ -24,6 +25,14 @@ class UserAPIView(GenericAPIView):
     serializer_class = CustomerUserProfileSerializer
     permission_classes = [IsAuthenticated]
 
+    @swagger_auto_schema(
+        operation_description="Получение полной информации о пользователе, только для авторизованных",
+        responses={
+            200:openapi.Response('Успешный ответ', CustomerUserProfileSerializer),
+            401: openapi.Response('Пользователь не авторизован')
+        }
+
+    )
     def get(self, request):
         serializer = self.serializer_class(request.user.user_profile)
         return Response(serializer.data)
