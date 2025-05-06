@@ -1,6 +1,13 @@
 from django.conf import settings
 from rest_framework.exceptions import ValidationError
 from rest_framework_simplejwt.tokens import RefreshToken
+import requests
+from dotenv import load_dotenv
+import os
+
+
+
+load_dotenv()
 
 
 def upload_photo_customer_user(instance, filename):
@@ -53,3 +60,6 @@ def user_record_verification(user, record):
     if record in user.user_profile.profile_records.all():
         return True
     return False
+
+
+# def request_telegram_bot()

@@ -27,6 +27,8 @@ class RecordSerializer(serializers.ModelSerializer):
             'status',
             'car',
             'service',
+            'first_name',
+            'last_name',
             'description',
             'recording_date',
             'date_create'

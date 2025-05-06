@@ -35,6 +35,8 @@ class Record(models.Model):
         on_delete=models.CASCADE,
         related_name='profile_records'
     )
+    first_name = models.CharField(max_length=55)
+    last_name = models.CharField(max_length=55)
     service = models.ForeignKey(
         'Service',
         on_delete=models.CASCADE,
@@ -51,7 +53,7 @@ class Record(models.Model):
         on_delete=models.CASCADE,
         related_name='car_records'
     )
-    recording_date = models.DateField()
+    recording_date = models.DateTimeField()
     description = models.CharField(max_length=500, blank=True, null=True)
     date_create = models.DateTimeField(auto_now_add=True)
 

@@ -26,6 +26,19 @@ class CarAPIView(GenericAPIView):
         serializer = self.serializer_class(car, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(
+        operation_description="Добавление машины",
+        responses={
+            401: openapi.Response("Пользователь не авторизован или неверный токен"),
+            400: openapi.Response("Ошибка валидации")
+        }
+    )
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(profile_user=request.user.user_profile)
+        return Response(serializer.data)
+
 
 class CarDetailAPIView(GenericAPIView):
     serializer_class = CarSerializer

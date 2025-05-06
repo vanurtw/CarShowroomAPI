@@ -5,6 +5,12 @@ from django.core.validators import FileExtensionValidator
 
 
 class CustomerUser(AbstractUser):
+    username = None
+    email = models.EmailField("email address", unique=True)
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
+
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'

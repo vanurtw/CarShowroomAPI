@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'cars.apps.CarsConfig',
     'records.apps.RecordsConfig',
+    'bot.apps.BotConfig',
 
 ]
 
