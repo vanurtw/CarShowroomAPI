@@ -39,3 +39,6 @@ urllib3==2.4.0
 
 
 # python manage.py createsuperuser создать суперпользователя(админа)
+
+
+# email and password от адимнки admin@admin.ru | admin
