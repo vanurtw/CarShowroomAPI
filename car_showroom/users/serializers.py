@@ -6,11 +6,13 @@ from django.contrib.auth.password_validation import validate_password as valid_p
 
 
 class CustomerUserSerializer(serializers.ModelSerializer):
+    phone = serializers.CharField(max_length=15)
 
     class Meta:
         model = CustomerUser
         fields = [
             'email',
+            'phone',
             'password',
         ]
 
@@ -45,7 +47,6 @@ class CustomerUserProfileSerializer(serializers.ModelSerializer):
             'description',
             'date_birth',
             'points',
-            'phone',
             'cars'
         ]
 
@@ -61,7 +62,6 @@ class ProfileSerializer(serializers.ModelSerializer):
             'description',
             'date_birth',
             'points',
-            'phone',
         ]
         extra_kwargs = {
             'points': {'read_only': True},

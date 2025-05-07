@@ -4,8 +4,8 @@ from .models import CustomerUser, Profile
 
 @admin.register(CustomerUser)
 class CustomerUserAdmin(admin.ModelAdmin):
-    list_display = ['id', 'username', 'email', 'is_staff']
-    list_display_links = ['id', 'username']
+    list_display = ['id', 'email', 'is_staff']
+    list_display_links = ['id']
     list_filter = ['is_staff']
 
 @admin.register(Profile)

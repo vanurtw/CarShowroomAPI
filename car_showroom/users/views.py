@@ -29,7 +29,10 @@ class RegistrationAPIView(GenericAPIView):
         if serializer.is_valid(raise_exception=True):
             user = serializer.save()
             tokens = get_tokens_for_user(user)
-            return Response(tokens)
+            serializer_user_info = CustomerUserProfileSerializer(user.user_profile)
+            data = tokens
+            data["user_info"] = serializer_user_info.data
+            return Response(data)
 
 
 class UserAPIView(GenericAPIView):
