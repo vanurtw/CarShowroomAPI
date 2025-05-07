@@ -29,7 +29,7 @@ class CustomerUserSerializer(serializers.ModelSerializer):
 class CustomerUserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomerUser
-        fields = ['username', 'email']
+        fields = ['phone', 'email']
 
 
 class CustomerUserProfileSerializer(serializers.ModelSerializer):
