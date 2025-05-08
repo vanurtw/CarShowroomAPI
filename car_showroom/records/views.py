@@ -10,6 +10,16 @@ from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
 
+class ServiceAPIView(GenericAPIView):
+    serializer_class = ServiceSerializer
+
+    @swagger_auto_schema(operation_description="Получение списка всех доступных услуг")
+    def get(self, request):
+        services = Service.objects.filter(active=True)
+        serializer = self.serializer_class(services, many=True)
+        return Response(serializer.data)
+
+
 class RecordAPIView(GenericAPIView):
     serializer_class = RecordSerializer
     permission_classes = [IsAuthenticated]
