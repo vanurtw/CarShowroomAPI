@@ -1,6 +1,9 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 from users.models import Profile
 from services.services import upload_photo_car
+
+
 
 
 class Car(models.Model):
@@ -23,7 +26,7 @@ class Car(models.Model):
     )
     brand = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
-    year = models.DateField(blank=True, null=True)
+    year = models.IntegerField(blank=True, null=True, validators=[MinValueValidator(1900)])
     image = models.ImageField(
         upload_to=upload_photo_car,
         blank=True,
